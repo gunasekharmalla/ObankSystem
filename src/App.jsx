@@ -12,6 +12,7 @@ import Chatbot from "./Components/Chatbot";
 import Recommendation from "./Components/Recommendation";
 import OrganList from "./Components/OrganList";
 import ForgotPassword from './Components/Common/ForgotPassword.jsx';
+import RecipientRecommendations from "./Components/Recommendation.jsx";
 import "./styles/app.css";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/patient-forgot-password" element={<ForgotPassword />} />
           <Route path="/patient-register" element={<PatientRegister />} />
           <Route path="/patient-dashboard" element={<PatientDashboard />} />
+          <Route path="/RecipientRecommendations" element={<RecipientRecommendations />} />
           <Route
             path="/dashboard"
             element={
@@ -40,6 +42,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+    
   );
 }
 

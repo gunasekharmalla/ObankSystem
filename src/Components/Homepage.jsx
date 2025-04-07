@@ -6,6 +6,7 @@ import instagramIcon from '../assets/instagram.png';
 import telegramIcon from '../assets/telegram.png';
 import Navbar from './Navbar';
 import App from '../App';
+import RecipientRecommendations from './Recommendation.jsx';
 
 const Homepage = () => {
   return (
@@ -19,6 +20,7 @@ const Homepage = () => {
               <li><Link to="/contact" style={styles.link}>Contact</Link></li>
               <li><Link to="/Patientlogin" style={styles.link}>Patient</Link></li>
               <li><Link to="/Doctorlogin" style={styles.link}>Doctor</Link></li>
+              <li><Link to="/RecipientRecommendations"style={styles.link}>Recommendation</Link> </li>
             </ul>
           </nav>
 
