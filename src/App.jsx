@@ -37,6 +37,8 @@ function App() {
               </>
             }
           />
+          {/* ✅ Dedicated route for Organ List Page */}
+          <Route path="/organlist" element={<OrganList />} />
         </Routes>
       </div>
     </Router>
