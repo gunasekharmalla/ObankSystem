@@ -4,48 +4,47 @@ import facebookIcon from '../assets/facebook.png';
 import twitterIcon from '../assets/twitter.png';
 import instagramIcon from '../assets/instagram.png';
 import telegramIcon from '../assets/telegram.png';
-<<<<<<< HEAD
-import './home.css'; // Make sure this import is correct
+import './home.css'; // Ensure this path is correct
 
-const Homepage = () => {
-  return (
-    <div className="home-container">
-      
-      {/* ---------- NAVBAR ---------- */}
-      <nav className="navbar">
-        <div className="navbar-container">
-          <h2 className="logo">ObankSystem</h2>
-          <ul className="nav-links">
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
-            <li><Link to="/Patientlogin">Patient</Link></li>
-            <li><Link to="/Doctorlogin">Doctor</Link></li>
-            <li><Link to="/organlist">Organ List</Link></li>
-          </ul>
-        </div>
-      </nav>
-=======
-import Navbar from './Navbar';
-import App from '../App';
-import RecipientRecommendations from './Recommendation.jsx';
+const styles = {
+  navbar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '1rem',
+    backgroundColor: '#f8f9fa',
+  },
+  logo: {
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+  },
+  navLinks: {
+    listStyle: 'none',
+    display: 'flex',
+    gap: '1rem',
+  },
+  link: {
+    textDecoration: 'none',
+    color: '#007bff',
+  },
+};
 
 const Homepage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Navbar */}
-       <nav style={styles.navbar}>
-            <h2 style={styles.logo}>My Blog</h2>
-            <ul style={styles.navLinks}>
-              <li><Link to="/" style={styles.link}>Home</Link></li>
-              <li><Link to="/about" style={styles.link}>About</Link></li>
-              <li><Link to="/contact" style={styles.link}>Contact</Link></li>
-              <li><Link to="/Patientlogin" style={styles.link}>Patient</Link></li>
-              <li><Link to="/Doctorlogin" style={styles.link}>Doctor</Link></li>
-              <li><Link to="/RecipientRecommendations"style={styles.link}>Recommendation</Link> </li>
-            </ul>
-          </nav>
->>>>>>> 8fceb2dfae43d9611b9a2cad4bbcc6ea0c9233bb
+      <nav style={styles.navbar}>
+        <h2 style={styles.logo}>My Blog</h2>
+        <ul style={styles.navLinks}>
+          <li><Link to="/" style={styles.link}>Home</Link></li>
+          <li><Link to="/about" style={styles.link}>About</Link></li>
+          <li><Link to="/contact" style={styles.link}>Contact</Link></li>
+          <li><Link to="/Patientlogin" style={styles.link}>Patient</Link></li>
+          <li><Link to="/Doctorlogin" style={styles.link}>Doctor</Link></li>
+          <li><Link to="/RecipientRecommendations" style={styles.link}>Recommendation</Link></li>
+          <li><Link to="/organlist" style={styles.link}>Organ List</Link></li>
+        </ul>
+      </nav>
 
       {/* ---------- MAIN SECTION ---------- */}
       <main className="main-content">
@@ -99,7 +98,6 @@ const Homepage = () => {
           </div>
         </div>
       </footer>
-
     </div>
   );
 };
