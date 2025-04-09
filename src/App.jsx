@@ -7,7 +7,6 @@ import DoctorDashboard from "./Components/Doctors/DoctorDashboard.jsx";
 import PatientLogin from "./Components/Patients/Patientlogin.jsx";
 import PatientRegister from './Components/Patients/PatientRegister';
 import PatientDashboard from './Components/Patients/PatientDashboard';
-
 import Chatbot from "./Components/Chatbot";
 import Recommendation from "./Components/Recommendation";
 import OrganList from "./Components/OrganList";
@@ -26,7 +25,7 @@ function App() {
           <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
           <Route path="/patientlogin" element={<PatientLogin />} />
           <Route path="/patient-forgot-password" element={<ForgotPassword />} />
-          <Route path="/patient-register" element={<PatientRegister />} />
+          <Route path="/patientregister" element={<PatientRegister />} />
           <Route path="/patient-dashboard" element={<PatientDashboard />} />
           <Route path="/RecipientRecommendations" element={<RecipientRecommendations />} />
           <Route

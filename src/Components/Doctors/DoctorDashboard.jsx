@@ -17,7 +17,7 @@ const DoctorDashboard = () =>
                     <li>📝 Manage Appointments</li>
                     <li>📤 Send Organ Request</li>
                     <li>🧾 View Reports</li>
-                    <li>⚙️ Profile Settings</li>
+                    <li>⚙ Profile Settings</li>
                 </ul>
             </div>
         );   

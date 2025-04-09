@@ -102,7 +102,7 @@ const Patientlogin = () => {
 
 export default Patientlogin;
 
-*/}
+*
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -186,6 +186,71 @@ const Patientlogin = () => {
       <p>
         Forgot your password?{' '}
         <Link to="/patient-forgot-password">Reset here</Link>
+      </p>
+      <p>
+        Don’t have an account? <Link to="/Patientregister">Register here</Link>
+      </p>
+    </div>
+  );
+};
+
+export default Patientlogin;
+
+*/} 
+
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+const Patientlogin = () => {
+  const navigate = useNavigate(); 
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // TODO: Send data to backend for authentication
+    console.log('Patient Login Data:', formData);
+    // Simulate successful login (replace with actual backend validation later)
+    if (formData.email && formData.password) {
+      // Navigate to patient dashboard
+      const patientName = "John Doe"; 
+      localStorage.setItem("patientName", patientName); 
+      navigate("/patient-dashboard");
+    } else {
+      alert('Please enter valid credentials');
+    }
+  };
+
+  return (
+    <div>
+      <h2>Patient Login</h2>
+      <form onSubmit={handleLogin}>
+        <div>
+          <label>Email:</label>
+          <input type="email" name="email" required onChange={handleChange} />
+        </div>
+
+        <div>
+          <label>Password:</label>
+          <input type="password" name="password" required onChange={handleChange} />
+        </div>
+
+        <button type="submit">Login</button>
+      </form>
+
+      <p>
+        Forgot your password?{' '}
+        <Link to="/patient-forgot-password">Reset here</Link>
+      </p>
+      <p>
+        Don’t have an account? <Link to="/PatientRegister">Register here</Link>
       </p>
     </div>
   );
