@@ -242,16 +242,18 @@ const Patientlogin = () => {
           <input type="password" name="password" required onChange={handleChange} />
         </div>
 
-        <button type="submit">Login</button>
+        <button type="submit">Login</button><br/>
+        <br/>
+        <p>
+        Forgot your password?{' '}
+        <Link to="/patient-forgot-password">Reset</Link>
+      </p>
+      <br/>
+      <p>
+        Don’t have an account? <Link to="/PatientRegister">Register</Link>
+      </p>
       </form>
 
-      <p>
-        Forgot your password?{' '}
-        <Link to="/patient-forgot-password">Reset here</Link>
-      </p>
-      <p>
-        Don’t have an account? <Link to="/PatientRegister">Register here</Link>
-      </p>
     </div>
   );
 };

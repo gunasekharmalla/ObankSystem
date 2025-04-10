@@ -36,7 +36,19 @@
     border-color: #3498db;
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.4);
   }
-  
+  .filter-dropdowns { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+
+.filter-dropdowns select { padding: 10px 14px; border: 1px solid #ccc; border-radius: 25px; font-size: 14px; transition: 0.3s ease; background-color: #fff; color: #333; }
+
+.filter-dropdowns select:focus { outline: none; border-color: #3498db; box-shadow: 0 0 5px rgba(52, 152, 219, 0.4); }
+
+.load-more-container { text-align: center; margin-top: 20px; }
+
+.load-more { background-color: #3498db; color: white; padding: 10px 24px; border: none; border-radius: 25px; font-size: 15px; cursor: pointer; transition: background 0.3s; }
+
+.load-more:hover { background-color: #2980b9; }
+
+
   .patient-list {
     display: flex;
     flex-direction: column;

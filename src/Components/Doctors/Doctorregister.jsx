@@ -1,60 +1,6 @@
-{/*}
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-
-
-const Doctorregister = () => {
-    const [formData, setFormData] = useState({
-      fullName: '', dob: '', gender: '', phone: '', email: '', password: '', confirmPassword: '',
-      address: '', specialization: '', experience: ''
-    });
-  
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
-    };
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      if (formData.password !== formData.confirmPassword) {
-        alert("Passwords do not match");
-        return;
-      }
-      // handle registration logic
-    };
-  
-    return (
-      <div className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded shadow">
-        <h2 className="text-2xl font-bold mb-4 text-center">Doctor Registration</h2>
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input name="fullName" placeholder="Full Name" required onChange={handleChange} className="p-2 rounded border border-gray-300" />
-          <input name="dob" type="date" required onChange={handleChange} className="p-2 rounded border border-gray-300" />
-          <select name="gender" required onChange={handleChange} className="p-2 rounded border border-gray-300">
-            <option value="">Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-          <input name="phone" placeholder="Phone Number" required onChange={handleChange} className="p-2 rounded border border-gray-300" />
-          <input name="email" type="email" placeholder="Email" required onChange={handleChange} className="p-2 rounded border border-gray-300" />
-          <input name="password" type="password" placeholder="Create Password" required onChange={handleChange} className="p-2 rounded border border-gray-300" />
-          <input name="confirmPassword" type="password" placeholder="Confirm Password" required onChange={handleChange} className="p-2 rounded border border-gray-300" />
-          <input name="address" placeholder="Address" required onChange={handleChange} className="p-2 rounded border border-gray-300" />
-          <input name="specialization" placeholder="Specialization" required onChange={handleChange} className="p-2 rounded border border-gray-300" />
-          <input name="experience" placeholder="Experience (years)" required onChange={handleChange} className="p-2 rounded border border-gray-300" />
-          <div className="md:col-span-2">
-            <button type="submit" className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">Register</button>
-          </div>
-        </form>
-      </div>
-    );
-  };
-  
-export default Doctorregister;
-
-*/}
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 const Doctorregister = () => {
@@ -70,7 +16,7 @@ const Doctorregister = () => {
     specialization: '',
     experience: '',
   });
-
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
 
   // Validation functions
@@ -129,6 +75,8 @@ const Doctorregister = () => {
     }
 
     console.log('Doctor Registered:', formData);
+    alert('Doctor Registration Successful!');
+    navigate('/doctor-dashboard'); // Redirect to doctor dashboard after successful registration
     // Submit form to API here
   };
 

@@ -113,15 +113,18 @@ import facebookIcon from '../assets/facebook.png';
 import twitterIcon from '../assets/twitter.png';
 import instagramIcon from '../assets/instagram.png';
 import telegramIcon from '../assets/telegram.png';
-import './home.css'; // Ensure this path is correct
+import './Home.css'; // Ensure this path is correct
 
 const styles = {
   navbar: {
+    
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '1rem',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#34E0A1',
+    color: '#3447AA'
+
   },
   logo: {
     fontSize: '1.5rem',
@@ -187,8 +190,8 @@ const Homepage = () => {
                 ...(isDropdownOpen ? styles.dropdownVisible : {}),
               }}
             >
-              <Link to="/Patientlogin" style={styles.dropdownItem}>Patient Login</Link>
-              <Link to="/Doctorlogin" style={styles.dropdownItem}>Doctor Login</Link>
+              <Link to="/Patientlogin" style={styles.dropdownItem}>Patient</Link>
+              <Link to="/Doctorlogin" style={styles.dropdownItem}>Doctor</Link>
             </div>
           </li>
           <li><Link to="/RecipientRecommendations" style={styles.link}>Recommendation</Link></li>
