@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './PatientRegister.css'; // Import your CSS file here
+
 const PatientRegister = () => {
   const [formData, setFormData] = useState({
     doctorId: '',
@@ -19,236 +18,135 @@ const PatientRegister = () => {
     weight: '',
     nationality: '',
   });
-  const navigate = useNavigate();
+
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
+
+  const genderOptions = ['Male', 'Female', 'Other'];
+  const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+  const countryList = [
+    'India', 'United States', 'Canada', 'Australia', 'United Kingdom',
+    'Germany', 'France', 'Italy', 'Spain', 'Brazil', 'Russia', 'China', 'Japan',
+    'South Korea', 'Mexico', 'Netherlands', 'Sweden', 'Norway', 'Switzerland',
+    'New Zealand', 'South Africa', 'Indonesia', 'Singapore', 'Malaysia', 'UAE',
+    'Saudi Arabia', 'Thailand', 'Philippines', 'Bangladesh', 'Pakistan'
+  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
 
-    // Optional: real-time validation
-    if (name === 'confirmPassword') {
-      if (value !== formData.password) {
-        setErrors({ ...errors, confirmPassword: 'Passwords do not match' });
-      } else {
-        const newErrors = { ...errors };
-        delete newErrors.confirmPassword;
-        setErrors(newErrors);
-      }
+    if (name === 'confirmPassword' && value !== formData.password) {
+      setErrors((prev) => ({ ...prev, confirmPassword: 'Passwords do not match' }));
+    } else {
+      setErrors((prev) => ({ ...prev, confirmPassword: undefined }));
     }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match';
+    }
+    if (!/^\d{10}$/.test(formData.phone)) {
+      newErrors.phone = 'Phone number must be 10 digits';
+    }
+    if (formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      setErrors({ confirmPassword: 'Passwords do not match' });
-      return;
-    }
+    if (!validateForm()) return;
 
-    // TODO: Validate doctor ID via API before submission
-    console.log('Patient Registration Submitted:', formData);
-    alert('Patient Registration Successful!');
-    navigate('/patient-dashboard'); // Redirect to patient dashboard after successful registration
+    fetch('http://localhost:5000/api/patient/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === 'Patient registered successfully') {
+          alert('Registration Successful!');
+          setFormData({
+            doctorId: '',
+            fullName: '',
+            dob: '',
+            gender: '',
+            phone: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+            address: '',
+            bloodGroup: '',
+            organNeeded: '',
+            height: '',
+            weight: '',
+            nationality: '',
+          });
+          navigate('/patient-dashboard');
+        } else {
+          alert(data.message || 'Registration failed');
+        }
+      })
+      .catch((err) => console.error('Registration Error:', err));
   };
 
   return (
     <div>
-    <div>
       <h2>Patient Registration</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Doctor ID:</label>
-          <input
-            type="text"
-            name="doctorId"
-            required
-            value={formData.doctorId}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label>Full Name:</label>
-          <input
-            type="text"
-            name="fullName"
-            required
-            value={formData.fullName}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label>DOB:</label>
-          <input
-            type="date"
-            name="dob"
-            required
-            value={formData.dob}
-            onChange={handleChange}
-          />
-        </div>
-
+        <div><label>Doctor ID:</label><input type="text" name="doctorId" required value={formData.doctorId} onChange={handleChange} /></div>
+        <div><label>Full Name:</label><input type="text" name="fullName" required value={formData.fullName} onChange={handleChange} /></div>
+        <div><label>DOB:</label><input type="date" name="dob" required value={formData.dob} onChange={handleChange} /></div>
+        
         <div>
           <label>Gender:</label>
-          <select name="gender" value={formData.gender} onChange={handleChange} required>
-            <option value="">--Select Gender--</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Others">Others</option>
+          <select name="gender" required value={formData.gender} onChange={handleChange}>
+            <option value="">Select Gender</option>
+            {genderOptions.map((g) => <option key={g} value={g}>{g}</option>)}
           </select>
         </div>
 
-        <div>
-          <label>Phone:</label>
-          <input
-            type="text"
-            name="phone"
-            required
-            value={formData.phone}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            required
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            required
-            value={formData.password}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label>Confirm Password:</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            required
-            value={formData.confirmPassword}
-            onChange={handleChange}
-          />
-          {errors.confirmPassword && (
-            <span style={{ color: 'red' }}>{errors.confirmPassword}</span>
-          )}
-        </div>
-
-        <div>
-          <label>Address:</label>
-          <textarea
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <div><label>Phone:</label><input type="text" name="phone" required value={formData.phone} onChange={handleChange} /></div>
+        <div><label>Email:</label><input type="email" name="email" required value={formData.email} onChange={handleChange} /></div>
+        <div><label>Password:</label><input type="password" name="password" required value={formData.password} onChange={handleChange} /></div>
+        <div><label>Confirm Password:</label><input type="password" name="confirmPassword" required value={formData.confirmPassword} onChange={handleChange} /></div>
+        <div><label>Address:</label><input type="text" name="address" required value={formData.address} onChange={handleChange} /></div>
 
         <div>
           <label>Blood Group:</label>
-          <select
-            name="bloodGroup"
-            value={formData.bloodGroup}
-            onChange={handleChange}
-            required
-          >
-            <option value="">--Select--</option>
-            <option value="A+">A+</option>
-            <option value="A−">A−</option>
-            <option value="B+">B+</option>
-            <option value="B−">B−</option>
-            <option value="O+">O+</option>
-            <option value="O−">O−</option>
-            <option value="AB+">AB+</option>
-            <option value="AB−">AB−</option>
+          <select name="bloodGroup" required value={formData.bloodGroup} onChange={handleChange}>
+            <option value="">Select Blood Group</option>
+            {bloodGroups.map((bg) => <option key={bg} value={bg}>{bg}</option>)}
           </select>
         </div>
 
-        <div>
-          <label>Organ Needed:</label>
-          <input
-            type="text"
-            name="organNeeded"
-            required
-            value={formData.organNeeded}
-            onChange={handleChange}
-          />
-        </div>
-
-        {/* New Fields */}
-        <div>
-          <label>Height (in cm):</label>
-          <input
-            type="number"
-            name="height"
-            required
-            value={formData.height}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label>Weight (in kg):</label>
-          <input
-            type="number"
-            name="weight"
-            required
-            value={formData.weight}
-            onChange={handleChange}
-          />
-        </div>
+        <div><label>Organ Needed:</label><input type="text" name="organNeeded" required value={formData.organNeeded} onChange={handleChange} /></div>
+        <div><label>Height (cm):</label><input type="number" name="height" required value={formData.height} onChange={handleChange} /></div>
+        <div><label>Weight (kg):</label><input type="number" name="weight" required value={formData.weight} onChange={handleChange} /></div>
 
         <div>
           <label>Nationality:</label>
-          <select
-            name="nationality"
-            value={formData.nationality}
-            onChange={handleChange}
-            required
-          >
-            <option value="">--Select Nationality--</option>
-            <option value="Indian">Indian</option>
-            <option value="American">American</option>
-            <option value="British">British</option>
-            <option value="Canadian">Canadian</option>
-            <option value="Australian">Australian</option>
-            <option value="Chaina">Australian</option>
-            <option value="Japanese">Japanese</option>
-            <option value="German">German</option>
-            <option value="French">French</option>
-            <option value="Italian">Italian</option>
-            <option value="Spanish">Spanish</option>
-            <option value="Brazilian">Brazilian</option>
-            <option value="Mexican">Mexican</option>
-            <option value="South African">South African</option>
-            <option value="Russian">Russian</option>
-            <option value="South Korean">South Korean</option>
-            <option value="New Zealander">New Zealander</option>
-            <option value="Saudi Arabian">Saudi Arabian</option>
-            <option value="Other">Other</option>
+          <select name="nationality" required value={formData.nationality} onChange={handleChange}>
+            <option value="">Select Country</option>
+            {countryList.map((country) => <option key={country} value={country}>{country}</option>)}
           </select>
         </div>
 
+        {errors.confirmPassword && <p style={{ color: 'red' }}>{errors.confirmPassword}</p>}
+        {errors.phone && <p style={{ color: 'red' }}>{errors.phone}</p>}
+        {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
+
         <button type="submit">Register</button>
       </form>
-    </div>
     </div>
   );
 };
