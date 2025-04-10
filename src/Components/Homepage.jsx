@@ -1,87 +1,248 @@
-import React from 'react';
+{/*im
+port React from 'react';
 import { Link } from 'react-router-dom';
 import facebookIcon from '../assets/facebook.png';
 import twitterIcon from '../assets/twitter.png';
 import instagramIcon from '../assets/instagram.png';
 import telegramIcon from '../assets/telegram.png';
-import './Home.css';
+import './home.css'; // Ensure this path is correct
+
+const styles = {
+  navbar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '1rem',
+    backgroundColor: '#f8f9fa',
+  },
+  logo: {
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+  },
+  navLinks: {
+    listStyle: 'none',
+    display: 'flex',
+    gap: '1rem',
+  },
+  link: {
+    textDecoration: 'none',
+    color: '#007bff',
+  },
+};
 
 const Homepage = () => {
-  const cardData = [
-    { title: "Connect with Doctors", img: "doctor", text: "Find expert medical professionals." },
-    { title: "Hospital Access", img: "hospital", text: "Integrate hospital data easily." },
-    { title: "AI Integration", img: "ai,health", text: "Use AI for better health predictions." },
-    { title: "Organ Donation Info", img: "organ donation", text: "Learn more about organ donations." },
-    { title: "Secure Records", img: "records", text: "Blockchain-based secure data." },
-    { title: "Live Updates", img: "monitoring", text: "Real-time organ availability." },
-    { title: "Awareness Campaigns", img: "awareness", text: "Join organ donation drives." },
-    { title: "User Dashboard", img: "dashboard", text: "Track your activity easily." },
-    { title: "Health Tips", img: "health tips", text: "Daily health and wellness advice." }
-  ];
-
   return (
-    <div className="main-container">
-      {/* Navbar */}
-      <nav className="navbar">
-        <h2 className="logo">ObankSystem</h2>
-        <ul className="nav-links">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/services">Services</Link></li>
-          <li><Link to="/blog">Blog</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li className="dropdown">
-            <span>Login ▾</span>
-            <ul className="dropdown-content">
-              <li><Link to="/Patientlogin">Patient</Link></li>
-              <li><Link to="/Doctorlogin">Doctor</Link></li>
-            </ul>
-          </li>
+    <div className="flex flex-col min-h-screen">
+      {/* Navbar 
+      <nav style={styles.navbar}>
+        <h2 style={styles.logo}>My Blog</h2>
+        <ul style={styles.navLinks}>
+          <li><Link to="/" style={styles.link}>Home</Link></li>
+          <li><Link to="/about" style={styles.link}>About</Link></li>
+          <li><Link to="/contact" style={styles.link}>Contact</Link></li>
+          <li><Link to="/Patientlogin" style={styles.link}>Patient</Link></li>
+          <li><Link to="/Doctorlogin" style={styles.link}>Doctor</Link></li>
+          <li><Link to="/RecipientRecommendations" style={styles.link}>Recommendation</Link></li>
+          <li><Link to="/organlist" style={styles.link}>Organ List</Link></li>
         </ul>
       </nav>
 
-      {/* Banner */}
-      <div className="banner">
-        <div className="banner-text">
-          <h1>"Saving lives through connection and compassion"</h1>
-        </div>
-      </div>
+      {/* ---------- MAIN SECTION ---------- *
+      <main className="main-content">
+        <h2 className="main-title">Welcome to ObankSystem</h2>
+        <p className="main-description">
+          A platform to manage organ donations, connect patients and doctors, and integrate AI-driven support for medical needs.
+        </p>
 
-      {/* Cards Section */}
-      <section className="cards-section">
-        <h2 className="section-title">What We Offer</h2>
         <div className="card-grid">
-          {cardData.map((card, index) => (
-            <div className="card" key={index}>
-              <img
-                src={`https://source.unsplash.com/400x250/?${card.img}`}
-                alt={card.title}
-                className="card-img"
-              />
-              <h3 className="card-title">{card.title}</h3>
-              <p className="card-text">{card.text}</p>
-            </div>
-          ))}
+          <div className="card">
+            <img src="https://source.unsplash.com/300x200/?doctor" alt="Doctor" className="card-img" />
+            <h3 className="card-title">Connect with Doctors</h3>
+            <p className="card-text">Find expert medical professionals to guide and treat patients in need.</p>
+          </div>
+          <div className="card">
+            <img src="https://source.unsplash.com/300x200/?hospital" alt="Hospital" className="card-img" />
+            <h3 className="card-title">Hospital Access</h3>
+            <p className="card-text">Seamlessly integrate hospital data for organ availability and patient history.</p>
+          </div>
+          <div className="card">
+            <img src="https://source.unsplash.com/300x200/?ai,health" alt="AI Integration" className="card-img" />
+            <h3 className="card-title">AI Integration</h3>
+            <p className="card-text">Leverage AI tools to make better health predictions and match organ donors.</p>
+          </div>
         </div>
-      </section>
+      </main>
 
-      {/* Footer */}
+      {/* ---------- FOOTER ---------- *
       <footer className="footer">
         <div className="footer-container">
+          {/* Left side text *
           <div className="footer-text">
             <p>&copy; {new Date().getFullYear()} ObankSystem. All rights reserved.</p>
-            <p>Address: Visakhapatnam, Andhra Pradesh, India</p>
+            <p>Powered by React & Express | Designed with 💙</p>
           </div>
+
+          {/* Right-aligned social icons *
           <div className="social-icons">
-            <a href="https://www.facebook.com/profile.php?id=100069855804824" target="_blank" rel="noreferrer">
+            <a href="https://www.facebook.com/profile.php?id=100069855804824" target="_blank" rel="noopener noreferrer">
               <img src={facebookIcon} alt="Facebook" className="icon" />
             </a>
-            <a href="https://x.com/CharanBehara3" target="_blank" rel="noreferrer">
+            <a href="https://x.com/CharanBehara3" target="_blank" rel="noopener noreferrer">
               <img src={twitterIcon} alt="Twitter" className="icon" />
             </a>
-            <a href="https://www.instagram.com/cherry_b45/" target="_blank" rel="noreferrer">
+            <a href="https://www.instagram.com/cherry_b45/" target="_blank" rel="noopener noreferrer">
               <img src={instagramIcon} alt="Instagram" className="icon" />
             </a>
-            <a href="https://web.telegram.org/a/#5082494190" target="_blank" rel="noreferrer">
+            <a href="https://web.telegram.org/a/#5082494190" target="_blank" rel="noopener noreferrer">
+              <img src={telegramIcon} alt="Telegram" className="icon" />
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default Homepage;
+
+*/}
+
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import facebookIcon from '../assets/facebook.png';
+import twitterIcon from '../assets/twitter.png';
+import instagramIcon from '../assets/instagram.png';
+import telegramIcon from '../assets/telegram.png';
+import './home.css'; // Ensure this path is correct
+
+const styles = {
+  navbar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '1rem',
+    backgroundColor: '#f8f9fa',
+  },
+  logo: {
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+  },
+  navLinks: {
+    listStyle: 'none',
+    display: 'flex',
+    gap: '1rem',
+    position: 'relative',
+  },
+  link: {
+    textDecoration: 'none',
+    color: '#007bff',
+  },
+  dropdown: {
+    position: 'absolute',
+    top: '100%',
+    left: 0,
+    backgroundColor: '#fff',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    borderRadius: '4px',
+    display: 'none',
+    flexDirection: 'column',
+    zIndex: 1000,
+  },
+  dropdownVisible: {
+    display: 'flex',
+  },
+  dropdownItem: {
+    padding: '0.5rem 1rem',
+    textDecoration: 'none',
+    color: '#007bff',
+    whiteSpace: 'nowrap',
+  },
+};
+
+const Homepage = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      {/* Navbar */}
+      <nav style={styles.navbar}>
+        <h2 style={styles.logo}>My Blog</h2>
+        <ul style={styles.navLinks}>
+          <li><Link to="/" style={styles.link}>Home</Link></li>
+          <li><Link to="/about" style={styles.link}>About</Link></li>
+          <li><Link to="/contact" style={styles.link}>Contact</Link></li>
+          <li
+            onMouseEnter={toggleDropdown}
+            onMouseLeave={toggleDropdown}
+            style={{ position: 'relative' }}
+          >
+            <span style={styles.link}>Login</span>
+            <div
+              style={{
+                ...styles.dropdown,
+                ...(isDropdownOpen ? styles.dropdownVisible : {}),
+              }}
+            >
+              <Link to="/Patientlogin" style={styles.dropdownItem}>Patient Login</Link>
+              <Link to="/Doctorlogin" style={styles.dropdownItem}>Doctor Login</Link>
+            </div>
+          </li>
+          <li><Link to="/RecipientRecommendations" style={styles.link}>Recommendation</Link></li>
+          <li><Link to="/organlist" style={styles.link}>Organ List</Link></li>
+        </ul>
+      </nav>
+
+      {/* ---------- MAIN SECTION ---------- */}
+      <main className="main-content">
+        <h2 className="main-title">Welcome to ObankSystem</h2>
+        <p className="main-description">
+          A platform to manage organ donations, connect patients and doctors, and integrate AI-driven support for medical needs.
+        </p>
+
+        <div className="card-grid">
+          <div className="card">
+            <img src="https://source.unsplash.com/300x200/?doctor" alt="Doctor" className="card-img" />
+            <h3 className="card-title">Connect with Doctors</h3>
+            <p className="card-text">Find expert medical professionals to guide and treat patients in need.</p>
+          </div>
+          <div className="card">
+            <img src="https://source.unsplash.com/300x200/?hospital" alt="Hospital" className="card-img" />
+            <h3 className="card-title">Hospital Access</h3>
+            <p className="card-text">Seamlessly integrate hospital data for organ availability and patient history.</p>
+          </div>
+          <div className="card">
+            <img src="https://source.unsplash.com/300x200/?ai,health" alt="AI Integration" className="card-img" />
+            <h3 className="card-title">AI Integration</h3>
+            <p className="card-text">Leverage AI tools to make better health predictions and match organ donors.</p>
+          </div>
+        </div>
+      </main>
+
+      {/* ---------- FOOTER ---------- */}
+      <footer className="footer">
+        <div className="footer-container">
+          {/* Left side text */}
+          <div className="footer-text">
+            <p>&copy; {new Date().getFullYear()} ObankSystem. All rights reserved.</p>
+            <p>Powered by React & Express | Designed with 💙</p>
+          </div>
+
+          {/* Right-aligned social icons */}
+          <div className="social-icons">
+            <a href="https://www.facebook.com/profile.php?id=100069855804824" target="_blank" rel="noopener noreferrer">
+              <img src={facebookIcon} alt="Facebook" className="icon" />
+            </a>
+            <a href="https://x.com/CharanBehara3" target="_blank" rel="noopener noreferrer">
+              <img src={twitterIcon} alt="Twitter" className="icon" />
+            </a>
+            <a href="https://www.instagram.com/cherry_b45/" target="_blank" rel="noopener noreferrer">
+              <img src={instagramIcon} alt="Instagram" className="icon" />
+            </a>
+            <a href="https://web.telegram.org/a/#5082494190" target="_blank" rel="noopener noreferrer">
               <img src={telegramIcon} alt="Telegram" className="icon" />
             </a>
           </div>
