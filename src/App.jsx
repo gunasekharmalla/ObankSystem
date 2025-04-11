@@ -12,6 +12,8 @@ import Recommendation from "./Components/Recommendation";
 import OrganList from "./Components/OrganList";
 import ForgotPassword from './Components/Common/ForgotPassword.jsx';
 import RecipientRecommendations from "./Components/Recommendation.jsx";
+import Services from "./Components/Services.jsx";
+import About from "./Components/About.jsx";
 import "./styles/app.css";
 
 function App() {
@@ -28,6 +30,7 @@ function App() {
           <Route path="/patientregister" element={<PatientRegister />} />
           <Route path="/patient-dashboard" element={<PatientDashboard />} />
           <Route path="/RecipientRecommendations" element={<RecipientRecommendations />} />
+          <Route path="/services" element={<Services />} />
           <Route
             path="/dashboard"
             element={
@@ -41,6 +44,12 @@ function App() {
           {/* ✅ Dedicated route for Organ List Page */}
           <Route path="/organlist" element={<OrganList />} />
         </Routes>
+          <div id="services">
+                 <Services />
+          </div>
+          <div id="about">
+                 <About />
+          </div>
       </div>
     </Router>
     

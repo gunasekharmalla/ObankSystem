@@ -1,0 +1,126 @@
+.services-section {
+    padding: 80px 40px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+  }
+  
+  .services-title {
+    text-align: center;
+    font-size: 36px;
+    color: #195ab4;
+    margin-bottom: 50px;
+    font-weight: bold;
+  }
+  
+  .services-grid {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .service-card {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .card-description {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+  }
+  
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+  .service-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  }
+  
+  .service-image-container {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    border-radius: 1.5rem;
+    overflow: hidden;
+  }
+  
+  .service-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    border-radius: 1.5rem;
+  }
+  
+  .service-card:hover .service-img {
+    transform: scale(1.1);
+  }
+  
+  .service-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 1.5rem;
+    background: linear-gradient(135deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
+    backdrop-filter: blur(8px);
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    padding: 1rem 1.2rem;
+  }
+  
+  .service-card:hover .service-overlay {
+    opacity: 1;
+  }
+  
+  .card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    color: #1c1c1c;
+  }
+  
+  .card-description {
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #333;
+  }
+  

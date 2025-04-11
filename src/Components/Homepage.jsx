@@ -1,51 +1,73 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import facebookIcon from '../assets/facebook.png';
 import twitterIcon from '../assets/twitter.png';
 import instagramIcon from '../assets/instagram.png';
 import telegramIcon from '../assets/telegram.png';
-import './Home.css'; // Ensure this path is correct
-import './about.css'; // Ensure this path is correct
-import About from './About';
+
 const styles = {
+  homepage: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
+    fontFamily: 'sans-serif',
+  },
   navbar: {
-    
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '1rem',
+    padding: '1rem 2rem',
     backgroundColor: '#34E0A1',
-    color: '#3447AA'
-
+    color: '#fff',
   },
   logo: {
-    fontSize: '1.5rem',
+    fontSize: '1.8rem',
     fontWeight: 'bold',
   },
   navLinks: {
     listStyle: 'none',
     display: 'flex',
-    gap: '1rem',
-    position: 'relative',
+    gap: '1.5rem',
+    margin: 0,
+    padding: 0,
+  },
+  navItem: {
+    fontSize: '18px',
+    padding: '8px 16px',
+    display: 'inline-block',
   },
   link: {
+    color: '#fff',
     textDecoration: 'none',
-    color: '#007bff',
+    fontSize: '18px',
+    padding: '8px 16px',
+    display: 'inline-block',
   },
-  dropdown: {
+  button: {
+    backgroundColor: '#04AA6D',
+    border: 'none',
+    color: 'white',
+    padding: '8px 16px',
+    textAlign: 'center',
+    textDecoration: 'none',
+    display: 'inline-block',
+    fontSize: '18px',
+    marginLeft: '10px',
+    borderRadius: '4px',
+    cursor: 'pointer',
+  },
+  dropdownContent: {
     position: 'absolute',
     top: '100%',
     left: 0,
     backgroundColor: '#fff',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    color: '#007bff',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
     borderRadius: '4px',
-    display: 'none',
-    flexDirection: 'column',
     zIndex: 1000,
-  },
-  dropdownVisible: {
     display: 'flex',
+    flexDirection: 'column',
+    minWidth: '120px',
   },
   dropdownItem: {
     padding: '0.5rem 1rem',
@@ -53,97 +75,133 @@ const styles = {
     color: '#007bff',
     whiteSpace: 'nowrap',
   },
+  banner: {
+    backgroundColor: '#f0f4f8',
+    padding: '4rem 2rem',
+    textAlign: 'center',
+  },
+  bannerText: {
+    fontSize: '2rem',
+    fontWeight: 'bold',
+  },
+  cardsSection: {
+    padding: '2rem',
+  },
+  sectionTitle: {
+    textAlign: 'center',
+    fontSize: '1.8rem',
+    marginBottom: '2rem',
+  },
+  cardGrid: {
+    display: 'flex',
+    gap: '2rem',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+  },
+
+  footer: {
+    backgroundColor: '#3447AA',
+    color: '#fff',
+    padding: '2rem',
+    marginTop: 'auto',
+    marginBottom: '0',
+  },
+  footerContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
+  socialIcons: {
+    display: 'flex',
+    gap: '1rem',
+    marginTop: '1rem',
+  },
+  icon: {
+    width: '24px',
+    height: '24px',
+  },
 };
 
 const Homepage = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
   return (
-    <div className="flex flex-col min-h-screen">
+    <div style={styles.homepage}>
       {/* Navbar */}
       <nav style={styles.navbar}>
-        <h2 style={styles.logo}>My Blog</h2>
+        <div style={styles.logo}>ObankSystem</div>
         <ul style={styles.navLinks}>
           <li><Link to="/" style={styles.link}>Home</Link></li>
-          <li><Link to="/about">About</Link></li>
+          <li>
+                <span
+                  onClick={() => {
+                    const servicesSection = document.getElementById('services');
+                    servicesSection?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  style={{ ...styles.link, ...styles.navItem, cursor: 'pointer' }}
+                >
+                  Services
+                </span>
+            </li>
+              <li>
+            <span
+                  onClick={() => {
+                    const servicesSection = document.getElementById('about');
+                    servicesSection?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  style={{ ...styles.link, ...styles.navItem, cursor: 'pointer' }}
+                >
+                  About
+                </span>
+            </li>
+
           <li><Link to="/contact" style={styles.link}>Contact</Link></li>
           <li
-            onMouseEnter={toggleDropdown}
-            onMouseLeave={toggleDropdown}
-            style={{ position: 'relative' }}
+            style={styles.navItem}
+            onMouseEnter={() => setIsDropdownOpen(true)}
+            onMouseLeave={() => setIsDropdownOpen(false)}
           >
             <span style={styles.link}>Login</span>
-            <div
-              style={{
-                ...styles.dropdown,
-                ...(isDropdownOpen ? styles.dropdownVisible : {}),
-              }}
-            >
-              <Link to="/Patientlogin" style={styles.dropdownItem}>Patient</Link>
-              <Link to="/Doctorlogin" style={styles.dropdownItem}>Doctor</Link>
-            </div>
+            {isDropdownOpen && (
+              <ul style={styles.dropdownContent}>
+                <li><Link to="/Patientlogin" style={styles.dropdownItem}>Patient</Link></li>
+                <li><Link to="/Doctorlogin" style={styles.dropdownItem}>Doctor</Link></li>
+              </ul>
+            )}
           </li>
-          <li><Link to="/RecipientRecommendations" style={styles.link}>Recommendation</Link></li>
-          <li><Link to="/organlist" style={styles.link}>Organ List</Link></li>
         </ul>
       </nav>
 
-      {/* ---------- MAIN SECTION ---------- */}
-      <main className="main-content">
-        <h2 className="main-title">Welcome to ObankSystem</h2>
-        <p className="main-description">
-          A platform to manage organ donations, connect patients and doctors, and integrate AI-driven support for medical needs.
-        </p>
+      {/* Banner */}
+      <section style={styles.banner}>
+        <div style={styles.bannerText}>Welcome to ObankSystem</div>
+      </section>
 
-        <div className="card-grid">
-          <div className="card">
-            <img src="https://source.unsplash.com/300x200/?doctor" alt="Doctor" className="card-img" />
-            <h3 className="card-title">Connect with Doctors</h3>
-            <p className="card-text">Find expert medical professionals to guide and treat patients in need.</p>
+      {/* Cards Section 
+      <section style={styles.cardsSection} id="new-services">
+        <h2 style={styles.sectionTitle}>Our Services</h2>
+        <div style={styles.cardGrid}>
+          <div style={styles.card}>
+            <img src="https://source.unsplash.com/300x200/?doctor" alt="Doctor" style={styles.cardImg} />
+            <h3 style={styles.cardTitle}>Connect with Doctors</h3>
+            <p style={styles.cardText}>Find expert medical professionals to guide and treat patients in need.</p>
           </div>
-          <div className="card">
-            <img src="https://source.unsplash.com/300x200/?hospital" alt="Hospital" className="card-img" />
-            <h3 className="card-title">Hospital Access</h3>
-            <p className="card-text">Seamlessly integrate hospital data for organ availability and patient history.</p>
+          <div style={styles.card}>
+            <img src="https://source.unsplash.com/300x200/?hospital" alt="Hospital" style={styles.cardImg} />
+            <h3 style={styles.cardTitle}>Hospital Access</h3>
+            <p style={styles.cardText}>Seamlessly integrate hospital data for organ availability and patient history.</p>
           </div>
-          <div className="card">
-            <img src="https://source.unsplash.com/300x200/?ai,health" alt="AI Integration" className="card-img" />
-            <h3 className="card-title">AI Integration</h3>
-            <p className="card-text">Leverage AI tools to make better health predictions and match organ donors.</p>
+          <div style={styles.card}>
+            <img src="https://source.unsplash.com/300x200/?ai,health" alt="AI Integration" style={styles.cardImg} />
+            <h3 style={styles.cardTitle}>AI Integration</h3>
+            <p style={styles.cardText}>Leverage AI tools to make better health predictions and match organ donors.</p>
           </div>
         </div>
-      </main>
-
-      {/* ---------- FOOTER ---------- */}
-      <footer className="footer">
-        <div className="footer-container">
-          {/* Left side text */}
-          <div className="footer-text">
-            <p>&copy; {new Date().getFullYear()} ObankSystem. All rights reserved.</p>
-            <p>Powered by React & Express | Designed with 💙</p>
-          </div>
-
-          {/* Right-aligned social icons */}
-          <div className="social-icons">
-            <a href="https://www.facebook.com/profile.php?id=100069855804824" target="_blank" rel="noopener noreferrer">
-              <img src={facebookIcon} alt="Facebook" className="icon" />
-            </a>
-            <a href="https://x.com/CharanBehara3" target="_blank" rel="noopener noreferrer">
-              <img src={twitterIcon} alt="Twitter" className="icon" />
-            </a>
-            <a href="https://www.instagram.com/cherry_b45/" target="_blank" rel="noopener noreferrer">
-              <img src={instagramIcon} alt="Instagram" className="icon" />
-            </a>
-            <a href="https://web.telegram.org/a/#5082494190" target="_blank" rel="noopener noreferrer">
-              <img src={telegramIcon} alt="Telegram" className="icon" />
-            </a>
-          </div>
-        </div>
-      </footer>
+      </section>
+                */}
+      {/* Footer */}
+      
     </div>
   );
 };
