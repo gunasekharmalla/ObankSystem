@@ -61,15 +61,17 @@ const Patientlogin = () => {
         {error && <p style={{ color: 'red' }}>{error}</p>}
         {success && <p style={{ color: 'green' }}>{success}</p>}
 
-        <button type="submit">Login</button>
-      </form>
-
-      <p>
+        <button type="submit">Login</button><br />
+        <p>
         Forgot your password? <Link to="/patient-forgot-password">Reset here</Link>
-      </p>
+      </p><br/>
       <p>
         Don’t have an account? <Link to="/PatientRegister">Register here</Link>
       </p>
+      <br />
+      </form>
+
+      
     </div>
   );
 };

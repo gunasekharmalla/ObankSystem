@@ -12,6 +12,8 @@ import Recommendation from "./Components/Recommendation";
 import OrganList from "./Components/OrganList";
 import ForgotPassword from './Components/Common/ForgotPassword.jsx';
 import RecipientRecommendations from "./Components/Recommendation.jsx";
+import Services from "./Components/Services.jsx";
+import About from "./Components/About.jsx";
 import "./styles/app.css";
 
 function App() {
@@ -19,15 +21,29 @@ function App() {
     <Router>
       <div className="container">
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route 
+            path="/" 
+            element={
+              <>
+                <HomePage />
+                <div id="services">
+                  <Services />
+                </div>
+                <div id="about">
+                  <About />
+                </div>
+              </>
+            } 
+          />
           <Route path="/doctorlogin" element={<DoctorLogin />} />
           <Route path="/doctorregister" element={<DoctorRegister />} />
           <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
           <Route path="/patientlogin" element={<PatientLogin />} />
-          <Route path="/patient-forgot-password" element={<ForgotPassword />} />
           <Route path="/patientregister" element={<PatientRegister />} />
           <Route path="/patient-dashboard" element={<PatientDashboard />} />
+          <Route path="/patient-forgot-password" element={<ForgotPassword />} />
           <Route path="/RecipientRecommendations" element={<RecipientRecommendations />} />
+          <Route path="/services" element={<Services />} />
           <Route
             path="/dashboard"
             element={
@@ -38,12 +54,10 @@ function App() {
               </>
             }
           />
-          {/* ✅ Dedicated route for Organ List Page */}
           <Route path="/organlist" element={<OrganList />} />
         </Routes>
       </div>
     </Router>
-    
   );
 }
 

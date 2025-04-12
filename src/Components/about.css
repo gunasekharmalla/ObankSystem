@@ -1,124 +1,251 @@
-.about-container {
-    max-width: 960px;
-    margin: 50px auto;
-    padding: 40px 30px;
-    background-color: #f9fdfd;
-    border-radius: 20px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
-    animation: fadeIn 1s ease;
-    font-family: "Segoe UI", sans-serif;
-  }
-  
-  .about-heading {
+/* Container for features */
+.obank-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin: 4rem auto;
+  max-width: 1000px;
+  padding: 0 1rem;
+}
+
+/* Each feature block */
+.obank-feature {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  background: #fefefe;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+  transition: transform 0.4s ease;
+}
+
+/* Reveal class to show on scroll */
+.obank-feature.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered delay (optional fallback for older browsers) */
+.obank-feature:nth-child(1) {
+  transition-delay: 0.2s;
+}
+.obank-feature:nth-child(2) {
+  transition-delay: 0.4s;
+}
+
+/* Image styling with hover scale */
+.obank-img {
+  width: 280px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.obank-feature:hover {
+  transform: scale(1.02);
+}
+
+/* Text block with hover animation */
+.obank-text {
+  flex: 1;
+  min-width: 250px;
+  transition: transform 0.3s ease;
+}
+
+.obank-text:hover {
+  transform: scale(1.03);
+}
+
+/* Typography */
+.obank-text h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: #055f4a;
+}
+
+.obank-text p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.about-cards 
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     text-align: center;
-    font-size: 36px;
-    margin-bottom: 30px;
-    color: #1a3d5d;
-    animation: slideDown 0.7s ease;
+    gap: 1.5rem;
+    padding: 2rem;
+    background-color: #f9f9f9;
+}
+.about-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  max-width: 300px;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.about-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+  color: #333;
+}
+.about-card p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+}
+.about-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hidden {
+  opacity: 0;
+}
+.about-title,
+.about-text,
+.obank-feature {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.about-card.show,
+.about-title.show,
+.about-text.show,
+.obank-feature.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* TEAM SECTION */
+.team-members {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.team-card {
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  width: 180px;
+  opacity: 1;
+  transform: translateY(40px);
+  transition: transform 0.8s ease, opacity 0.6s ease;
+}
+
+.team-card.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.photo-container {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto;
+}
+
+.team-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 7cm;
+  object-fit: cover;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.team-card:hover .team-photo {
+  transform: scale(1.2);
+}
+
+.team-name {
+  margin-top: 0.7rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
+}
+
+.bio-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(4, 170, 109, 0.8);
+  color: white;
+  font-size: 0.85rem;
+  padding: 0.6rem;
+  opacity: 0;
+  border-bottom-left-radius: 5cm;
+  border-bottom-right-radius: 5cm;
+  transition: opacity 0.3s ease;
+}
+
+.photo-container:hover .bio-overlay {
+  opacity: 1;
+}
+
+/* Optional: Media Queries for Mobile */
+@media (max-width: 768px) {
+  .obank-feature {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  .about-section {
-    margin-bottom: 40px;
-    animation: fadeSlide 0.8s ease;
+
+  .obank-img {
+    width: 100%;
+    height: auto;
   }
-  
-  .about-section h2 {
-    font-size: 24px;
-    color: #2c3e50;
-    margin-bottom: 12px;
+
+  .photo-container {
+    width: 130px;
+    height: 130px;
   }
-  
-  .about-section p {
-    font-size: 16px;
-    color: #555;
-    line-height: 1.7;
+
+  .team-photo {
+    border-radius: 5cm;
   }
-  
-  .about-section ul {
-    list-style: none;
-    padding-left: 0;
-  }
-  
-  .about-section li {
-    background: #ecf9f9;
-    margin-bottom: 10px;
-    padding: 10px 16px;
-    border-radius: 10px;
-    font-size: 15px;
-    color: #333;
-    transition: background-color 0.3s ease;
-  }
-  
-  .about-section li:hover {
-    background: #d4f1f1;
-  }
-  
-  .contact-btn {
-    padding: 12px 24px;
-    font-size: 16px;
-    border: none;
-    background-color: #27ae60;
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .contact-btn:hover {
-    background-color: #1e8449;
-  }
-  
-  /* Animations */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.98);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-  
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes fadeSlide {
-    from {
-      opacity: 0;
-      transform: translateX(-25px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    .about-container {
-      padding: 30px 20px;
-    }
-  
-    .about-heading {
-      font-size: 28px;
-    }
-  
-    .about-section h2 {
-      font-size: 20px;
-    }
-  
-    .contact-btn {
-      width: 100%;
-      padding: 12px;
-    }
-  }
-  
+}
+
+.footer {
+  background-color: #111;
+  color: #fff;
+  padding: 2rem 1rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.footer-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.footer p {
+  margin: 0.3rem 0;
+}
+
+.social-icons {
+  margin-top: 1rem;
+}
+
+.footer-icon {
+  width: 30px;
+  margin: 0 10px;
+  transition: transform 0.3s ease;
+}
+
+.footer-icon:hover {
+  transform: scale(1.1);
+}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './PatientRegister.css'; // Assuming you have a CSS file for styling
 
 const PatientRegister = () => {
   const [formData, setFormData] = useState({
