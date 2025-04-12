@@ -1,17 +1,23 @@
 import React, { useEffect } from 'react';
 import './about.css';
+import facebookIcon from '../assets/facebook.png';
+import twitterIcon from '../assets/twitter.png';
+import instagramIcon from '../assets/instagram.png';
+import telegramIcon from '../assets/telegram.png';
+
+
 
 const team = [
   {
     name: 'Yamuna',
     img: '/images/yamuna.jpeg',
-    link: 'https://www.linkedin.com/in/member1',
+    link: 'https://www.linkedin.com/in/yamuna-mapadini-739111295?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
     bio: 'Frontend Developer passionate about React and UX.',
   },
   {
     name: 'Preethi',
     img: '/images/preethi.jpeg', // ✅ Fixed this one
-    link: 'https://twitter.com/member2',
+    link: 'https://www.linkedin.com/in/puppala-sasi-preethi-5746a4306?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
     bio: 'AI/ML Engineer working on healthcare analytics.',
   },
   {
@@ -23,7 +29,7 @@ const team = [
   {
     name: 'M Guna Sekhar',
     img: '/images/gunasekhar.jpeg',
-    link: 'https://instagram.com/member4',
+    link: 'https://www.linkedin.com/in/malla-guna-sekhar-5a2959288/',
     bio: 'UI Designer creating beautiful interfaces.',
   },
 ];
@@ -119,6 +125,7 @@ const About = () => {
         </div>
 
         <h3 className="team-title hidden" style={{textAlign:'center'}}>Meet Our Team </h3>
+        <h2>Meet Our Team </h2>
         <div className="team-members">
           {team.map((member, index) => (
             <a
@@ -136,7 +143,31 @@ const About = () => {
             </a>
           ))}
         </div>
+      </div>  {/*team member div end */}
+
+          <footer className="footer">
+      <div className="footer-container">
+        <p>Helping save lives through organ donation and awareness.</p>
+        <p>© 2025 ObankSystem. All rights reserved.</p>
+        <div className="social-icons">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+            <img src={facebookIcon} alt="Facebook" className="footer-icon" />
+          </a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+            <img src={twitterIcon} alt="Twitter" className="footer-icon" />
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+            <img src={instagramIcon} alt="Instagram" className="footer-icon" />
+          </a>
+          <a href="https://telegram.org" target="_blank" rel="noopener noreferrer">
+            <img src={telegramIcon} alt="Telegram" className="footer-icon" />
+          </a>
+        </div>
       </div>
+    </footer>
+
+
+
     </section>
   );
 };

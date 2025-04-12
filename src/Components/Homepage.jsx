@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import facebookIcon from '../assets/facebook.png';
-import twitterIcon from '../assets/twitter.png';
-import instagramIcon from '../assets/instagram.png';
-import telegramIcon from '../assets/telegram.png';
+
 
 const styles = {
   homepage: {
@@ -17,7 +14,7 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '1rem 2rem',
-    backgroundColor: '#34E0A1',
+    backgroundColor: '#3447AA',
     color: '#fff',
   },
   logo: {
@@ -26,10 +23,12 @@ const styles = {
   },
   navLinks: {
     listStyle: 'none',
-    display: 'flex',
-    gap: '1.5rem',
-    margin: 0,
-    padding: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '1.5rem',
+  margin: 0,
+  padding: 0,
   },
   navItem: {
     fontSize: '18px',
@@ -75,6 +74,8 @@ const styles = {
     color: '#007bff',
     whiteSpace: 'nowrap',
   },
+
+    
   banner: {
     backgroundColor: '#f0f4f8',
     padding: '4rem 2rem',
@@ -120,11 +121,18 @@ const styles = {
   icon: {
     width: '24px',
     height: '24px',
+    filter: 'brightness(0) invert(1)', // ensures white icons on dark background
+    transition: 'transform 0.3s ease',
   },
+  
 };
 
 const Homepage = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
 
   return (
     <div style={styles.homepage}>
@@ -132,78 +140,76 @@ const Homepage = () => {
       <nav style={styles.navbar}>
         <div style={styles.logo}>ObankSystem</div>
         <ul style={styles.navLinks}>
-          <li><Link to="/" style={styles.link}>Home</Link></li>
-          <li>
-                <span
-                  onClick={() => {
-                    const servicesSection = document.getElementById('services');
-                    servicesSection?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  style={{ ...styles.link, ...styles.navItem, cursor: 'pointer' }}
-                >
-                  Services
-                </span>
-            </li>
-              <li>
-            <span
-                  onClick={() => {
-                    const servicesSection = document.getElementById('about');
-                    servicesSection?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  style={{ ...styles.link, ...styles.navItem, cursor: 'pointer' }}
-                >
-                  About
-                </span>
-            </li>
-
-          <li><Link to="/contact" style={styles.link}>Contact</Link></li>
-          <li
-            style={styles.navItem}
-            onMouseEnter={() => setIsDropdownOpen(true)}
-            onMouseLeave={() => setIsDropdownOpen(false)}
-          >
-            <span style={styles.link}>Login</span>
-            {isDropdownOpen && (
-              <ul style={styles.dropdownContent}>
-                <li><Link to="/Patientlogin" style={styles.dropdownItem}>Patient</Link></li>
-                <li><Link to="/Doctorlogin" style={styles.dropdownItem}>Doctor</Link></li>
-              </ul>
-            )}
-          </li>
-        </ul>
-      </nav>
+  <li style={styles.navItem}><Link to="/" style={styles.link}>Home</Link></li>
+  <li style={styles.navItem}>
+    <span
+      onClick={() => {
+        const servicesSection = document.getElementById('services');
+        servicesSection?.scrollIntoView({ behavior: 'smooth' });
+      }}
+      style={{ ...styles.link, cursor: 'pointer' }}
+    >
+      Services
+    </span>
+  </li>
+  <li style={styles.navItem}>
+    <span
+      onClick={() => {
+        const aboutSection = document.getElementById('about');
+        aboutSection?.scrollIntoView({ behavior: 'smooth' });
+      }}
+      style={{ ...styles.link, cursor: 'pointer' }}
+    >
+      About
+    </span>
+  </li>
+  <li style={styles.navItem}><Link to="/contact" style={styles.link}>Contact</Link></li>
+  <li
+    style={{ ...styles.navItem, position: 'relative' }}
+    onMouseEnter={() => setIsDropdownOpen(true)}
+    onMouseLeave={() => setIsDropdownOpen(false)}
+  >
+    <span style={styles.link}>Login</span>
+    {isDropdownOpen && (
+      <ul style={styles.dropdownContent}>
+        <li><Link to="/Patientlogin" style={styles.dropdownItem}>Patient</Link></li>
+        <li><Link to="/Doctorlogin" style={styles.dropdownItem}>Doctor</Link></li>
+      </ul>
+    )}
+  </li>
+</ul>
+</nav>
 
       {/* Banner */}
       <section style={styles.banner}>
         <div style={styles.bannerText}>Welcome to ObankSystem</div>
+        <h2> “One donation can save up to 8 lives. Join the Obank movement today!”</h2>
+        <h3>Your Trusted Organ Donation & Availability Network</h3>
+        <h3> Search Available Organs Instantly</h3>
+        <p>Find the required organs across verified hospitals and donors in real-time.</p>
+        <h3> Connect with Donors & Hospitals</h3>
+        <p>Seamlessly connect with verified donors and hospitals for organ availability.</p>
+        <h3> Live Organ Availability Dashboard</h3>
+        <p>Stay updated with the latest organ availability status across locations.</p>
+        <h3> Awareness & Support</h3>
+        <p>Learn more about organ donation, eligibility, and how you can help save lives.</p>
+        <h3> Secure & Confidential</h3>
+        <p>All your data is protected with top-level encryption and privacy standards.</p>
+        <h3> Lets Stretch Our Hands to Join the Movement</h3>
       </section>
 
-      {/* Cards Section 
-      <section style={styles.cardsSection} id="new-services">
-        <h2 style={styles.sectionTitle}>Our Services</h2>
-        <div style={styles.cardGrid}>
-          <div style={styles.card}>
-            <img src="https://source.unsplash.com/300x200/?doctor" alt="Doctor" style={styles.cardImg} />
-            <h3 style={styles.cardTitle}>Connect with Doctors</h3>
-            <p style={styles.cardText}>Find expert medical professionals to guide and treat patients in need.</p>
-          </div>
-          <div style={styles.card}>
-            <img src="https://source.unsplash.com/300x200/?hospital" alt="Hospital" style={styles.cardImg} />
-            <h3 style={styles.cardTitle}>Hospital Access</h3>
-            <p style={styles.cardText}>Seamlessly integrate hospital data for organ availability and patient history.</p>
-          </div>
-          <div style={styles.card}>
-            <img src="https://source.unsplash.com/300x200/?ai,health" alt="AI Integration" style={styles.cardImg} />
-            <h3 style={styles.cardTitle}>AI Integration</h3>
-            <p style={styles.cardText}>Leverage AI tools to make better health predictions and match organ donors.</p>
-          </div>
-        </div>
-      </section>
-                */}
+      
+                
       {/* Footer */}
+
+     
+
       
     </div>
+
+          
+
   );
 };
 
-export default Homepage;
+export default Homepage;                                                                                                         
