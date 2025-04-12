@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -15,6 +14,7 @@ const Doctorregister = () => {
     address: '',
     specialization: '',
     experience: '',
+    hospital: '',
   });
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
@@ -60,7 +60,7 @@ const Doctorregister = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newErrors = {};
@@ -74,10 +74,27 @@ const Doctorregister = () => {
       return;
     }
 
-    console.log('Doctor Registered:', formData);
-    alert('Doctor Registration Successful!');
-    navigate('/doctor-dashboard'); // Redirect to doctor dashboard after successful registration
-    // Submit form to API here
+    try {
+      const response = await fetch('http://localhost:5000/api/doctors/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Doctor Registration Successful!');
+        navigate('/doctor-dashboard');
+      } else {
+        alert(`Registration failed: ${data.error || 'Unknown error'}`);
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+      alert('An error occurred while registering. Please try again.');
+    }
   };
 
   return (
@@ -100,6 +117,12 @@ const Doctorregister = () => {
           { label: 'Address', name: 'address', type: 'textarea' },
           { label: 'Specialization', name: 'specialization', type: 'text' },
           { label: 'Experience (in years)', name: 'experience', type: 'number' },
+          {
+            label: 'Hospital',
+            name: 'hospital',
+            type: 'select',
+            options: ['', 'Apollo', 'Fortis', 'AIIMS', 'Max', 'Care']
+          },
         ].map(({ label, name, type, options }) => (
           <div key={name} style={{ marginBottom: '12px' }}>
             <label>{label}:</label><br />
@@ -112,7 +135,7 @@ const Doctorregister = () => {
             ) : type === 'select' ? (
               <select name={name} value={formData[name]} onChange={handleChange}>
                 {options.map(opt => (
-                  <option key={opt} value={opt}>{opt || 'Select Gender'}</option>
+                  <option key={opt} value={opt}>{opt || 'Select an option'}</option>
                 ))}
               </select>
             ) : (

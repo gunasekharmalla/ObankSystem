@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './Donate.css'; // Assuming you have a CSS file for styling
 const Donate = () => {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -22,11 +22,30 @@ const Donate = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Donation Form Data:', formData);
-    alert('Thank you for your willingness to donate!');
+  
+    try {
+      const res = await fetch('http://localhost:5000/api/donation/donate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+  
+      if (res.ok) {
+        alert('Thank you for your willingness to donate!');
+        setFormData({ /* clear the form */ });
+      } else {
+        alert('Failed to submit form.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Server error');
+    }
   };
+  
 
   return (
     <div className="donate-form-container">

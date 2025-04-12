@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
-import {Link, useNavigate } from 'react-router-dom';
-import './Doctorlogin.css';   // Import your CSS file here
+import { Link, useNavigate } from 'react-router-dom';
+import './Doctorlogin.css';
 
 const Doctorlogin = () => {
   const [formData, setFormData] = useState({
@@ -9,13 +8,14 @@ const Doctorlogin = () => {
     password: '',
     hospital: '',
   });
-  const navigate = useNavigate(); 
-  const [credentials, setCredentials] = useState({password: '', email: '', hospital: ''});
   const [errors, setErrors] = useState({});
+  const [serverError, setServerError] = useState('');
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
   const [resetError, setResetError] = useState('');
   const [resetSuccess, setResetSuccess] = useState('');
+
+  const navigate = useNavigate();
 
   const hospitals = ['Apollo', 'Fortis', 'AIIMS', 'Max', 'Care'];
 
@@ -42,29 +42,41 @@ const Doctorlogin = () => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     setErrors(prev => ({ ...prev, [name]: '' }));
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+    setServerError('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-      // Simulate successful login (replace with actual backend validation later)
-      if (credentials.email && credentials.password && credentials.hospital) {
-        // Navigate to patient dashboard
-        //const patientName = "Charan"; 
-        const name = "BLS Charan"; 
-        //localStorage.setItem("doctorName", doctorName);
-        localStorage.setItem("doctorName", name);
-        navigate('/doctor-dashboard');
-      } else {
-        alert('Please enter valid credentials');
-      }
+
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
-    console.log('Doctor Login Submitted:', formData);
-    // Add API login logic here
+
+    try {
+      const response = await fetch('http://localhost:5000/api/doctors/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Assuming backend returns the doctor's name
+        localStorage.setItem('doctorName', data.doctorName || 'Doctor');
+        alert('Login successful!');
+        navigate('/doctor-dashboard');
+      } else {
+        setServerError(data.error || 'Login failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setServerError('An error occurred. Please try again later.');
+    }
   };
 
   const handleResetSubmit = (e) => {
@@ -147,6 +159,8 @@ const Doctorlogin = () => {
             {errors.hospital && <p style={{ color: 'red' }}>{errors.hospital}</p>}
           </div>
 
+          {serverError && <p style={{ color: 'red' }}>{serverError}</p>}
+
           <button type="submit">Login</button>
 
           <p>
@@ -154,14 +168,12 @@ const Doctorlogin = () => {
               Forgot Password?
             </button>
           </p>
-              <br/>
+          <br />
           <p>
-        Don’t have an account? <a href="/doctorregister">Register here</a>
-      </p>
-
+            Don’t have an account? <Link to="/doctorregister">Register here</Link>
+          </p>
         </form>
       )}
-
     </div>
   );
 };

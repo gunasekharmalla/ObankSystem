@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Request.css'; // Assuming you have a CSS file for styling
 
 const Request = () => {
   const [formData, setFormData] = useState({
@@ -22,11 +23,30 @@ const Request = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Request Form Data:', formData);
-    alert('Your organ request has been submitted successfully!');
+  
+    try {
+      const res = await fetch('http://localhost:5000/api/request/request', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+  
+      if (res.ok) {
+        alert('Your organ request has been submitted successfully!');
+        setFormData({ /* clear the form */ });
+      } else {
+        alert('Failed to submit request.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Server error');
+    }
   };
+  
 
   return (
     <div className="request-form-container">

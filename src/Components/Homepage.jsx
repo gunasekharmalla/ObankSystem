@@ -164,18 +164,18 @@ const Homepage = () => {
     </span>
   </li>
 
+ <li style={styles.navItem}>
+  <span
+    onClick={() => {
+  const aboutSection = document.getElementById("about");
+  if (aboutSection) {
+    aboutSection.scrollIntoView({ behavior: "smooth" });
+  }
+}} style={{color:'white',fontSize:'15px'}}> 
+  Contact
+</span>
+</li>
 
-  <li style={styles.navItem}>
-  
-      <span
-      onClick={() => {
-        const aboutSection = document.getElementById('about');
-        aboutSection?.scrollIntoView({ behavior: 'smooth' });
-      }}
-      style={{ ...styles.link, cursor: 'pointer' }}
-    > Contact   
-    </span>
-  </li>
 
   <li
     style={{ ...styles.navItem, position: 'relative' }}
@@ -225,4 +225,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;                                                                                                         
+export default Homepage;
